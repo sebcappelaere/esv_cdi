@@ -30,7 +30,7 @@ class Adresse
 
     /**
      * @var int
-     *
+     * @Assert\Range(max="5",maxMessage="Le code postal est invalide")
      * @ORM\Column(name="code_postal", type="integer")
      */
     private $codePostal;

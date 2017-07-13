@@ -23,21 +23,28 @@ class Personne
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Le nom ne peut être vide")
+     * @Assert\Length(max="50",min="2",
+     * minMessage="Votre nom doit faire plus de {{ limit }} caractères!",
+     * maxMessage="Votre nom doit faire moins de {{ limit }} caractères!")
      * @ORM\Column(name="nom", type="string", length=50)
      */
     private $nom;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Le prénom ne peut être vide")
+     * @Assert\Length(max="50",min="2",
+     * minMessage="Votre prénom doit faire plus de {{ limit }} caractères!",
+     * maxMessage="Votre prénom doit faire moins de {{ limit }} caractères!")
      * @ORM\Column(name="prenom", type="string", length=50)
      */
     private $prenom;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="Vous devez saisir une adresse mail")
+     * @Assert\Email(message="Vous devez saisir une adresse mail valide")
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      */
     private $email;
