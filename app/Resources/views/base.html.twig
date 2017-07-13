@@ -2,12 +2,18 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block title %}Examen ESV{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('dependencies/bootstrap/dist/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('dependencies/bootstrap/dist/css/bootstrap-theme.min.css') }}">
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('dependencies/jquery/dist/jquery.min.js') }}"></script>
+            <script src="{{ asset('dependencies/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
