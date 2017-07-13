@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Personne
@@ -142,6 +143,38 @@ class Personne
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPaiements()
+    {
+        return $this->paiements;
+    }
+
+    /**
+     * @param ArrayCollection $paiements
+     */
+    public function setPaiements($paiements)
+    {
+        $this->paiements = $paiements;
+    }
+
+    /**
+     * @return Adresse
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param Adresse $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
     }
 }
 

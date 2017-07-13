@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Paiement
@@ -128,6 +129,22 @@ class Paiement
     public function getNature()
     {
         return $this->nature;
+    }
+
+    /**
+     * @return Personne
+     */
+    public function getPersonne()
+    {
+        return $this->personne;
+    }
+
+    /**
+     * @param Personne $personne
+     */
+    public function setPersonne($personne)
+    {
+        $this->personne = $personne;
     }
 }
 
