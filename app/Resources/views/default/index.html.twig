@@ -4,12 +4,14 @@
     <div class="col-md-10 col-md-offset-1">
         <h1>Récupération du fichier prestataire</h1>
         <br>
-        <form method="post" action="#">
-            <div class="form-group-lg">
-                <label style="font-size: large">Fichier .csv à charger</label>
-                <input type="file" class="form-control" aria-describedby="basic-addon2">
-                <button type="submit" class="btn btn-default">Télécharger</button>
-            </div>
-        </form>
+        {{ form(fileForm) }}
+
+        <table class="table">
+        <tr>
+
+        </tr>
+
+        </table>
     </div>
+
 {% endblock %}
