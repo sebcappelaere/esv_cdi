@@ -42,6 +42,11 @@ class Paiement
      */
     private $nature;
 
+    /**
+     * @var Personne
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Personne", inversedBy="paiements")
+     */
+    private $personne;
 
     /**
      * Get id

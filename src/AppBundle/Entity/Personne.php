@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -49,6 +50,17 @@ class Personne
      */
     private $email;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Paiement", mappedBy="personne")
+     */
+    private $paiements;
+
+    /**
+     * @var Adresse
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adresse", inversedBy="personnes")
+     */
+    private $adresse;
 
     /**
      * Get id
