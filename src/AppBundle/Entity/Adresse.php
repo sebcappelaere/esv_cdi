@@ -131,5 +131,30 @@ class Adresse
     {
         return $this->ville;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPersonnes()
+    {
+        return $this->personnes;
+    }
+
+    /**
+     * @param ArrayCollection $personnes
+     */
+    public function setPersonnes($personnes)
+    {
+        $this->personnes = $personnes;
+    }
+
+    /**
+     * Ajout d'une personne à l'adresse
+     * @param $person
+     */
+    public function addPersonne($person){
+        $this->personnes[] = $person;
+    }
 }
+
 

@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Adresse;
+use AppBundle\Entity\Paiement;
 use AppBundle\Entity\Personne;
 use AppBundle\Repository\PersonneRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -77,16 +78,43 @@ class DefaultController extends Controller
                         ->setEmail($columns[2]);
                 }
 
+                //Vérification si les données du fichier csv sont bien ordonnées
+                if (empty($columns[8])){
+                    //Décalage des données d'une colonne à partir de la date
+                    $columns[8] = $columns[7];
+                    $columns[7] = $columns[6];
+                    $columns[6] = $columns[5];
+                }
+
                 //Création d'une éventuelle nouvelle adresse
                 if (!empty($columns[3])){
                     $adress = new Adresse();
                     $adress->setAdresse($columns[3])
                         ->setCodePostal($columns[4])
                         ->setVille($columns[5]);
+                    //Ajout de la personne à cette adresse
+                    $adress->addPersonne($person);
+                    //Ajout de l'adresse à la personne
+                    $person->setAdresse($adress);
                 }
 
+                //Modification de la date du format français à anglais
+                $jour = substr($columns[6],0,2);
+                $mois = substr($columns[6],3,2);
+                $annee = substr($columns[6],6,4);
+                $date = $annee.$mois.$jour;
+
                 //Création d'un éventuel nouveau paiement
-                if ()
+                $paiement = new Paiement();
+                $paiement->setDate($date)
+                    ->setMontant($columns[7])
+                    ->setNature($columns[8]);
+                //Ajout de la personne à ce paiement
+                $paiement->setPersonne($person);
+                //Ajout du paiement à la personne
+                $person->addPaiement($paiement);
+
+
             }
         }
 

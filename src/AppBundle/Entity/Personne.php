@@ -162,6 +162,14 @@ class Personne
     }
 
     /**
+     * Ajout d'un paiement à la personne
+     * @param $paiement
+     */
+    public function addPaiement($paiement){
+        $this->paiements[] = $paiement;
+    }
+
+    /**
      * @return Adresse
      */
     public function getAdresse()
