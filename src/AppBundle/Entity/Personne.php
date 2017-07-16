@@ -53,13 +53,13 @@ class Personne
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Paiement", mappedBy="personne")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Paiement", mappedBy="personne", cascade={"persist"})
      */
     private $paiements;
 
     /**
      * @var Adresse
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adresse", inversedBy="personnes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Adresse", inversedBy="personnes", cascade={"persist"})
      */
     private $adresse;
 

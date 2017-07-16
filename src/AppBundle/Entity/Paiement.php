@@ -45,7 +45,7 @@ class Paiement
 
     /**
      * @var Personne
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Personne", inversedBy="paiements")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Personne", inversedBy="paiements", cascade={"persist"})
      */
     private $personne;
 

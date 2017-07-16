@@ -40,11 +40,10 @@ class DefaultController extends Controller
 
             //Récupération des données du fichier
             $data = file_get_contents($file);
+
+            //Appel d'une fonction pour insérer les données dans la base de données
+            $this->putDataInDatabase($data);
         }
-
-        //Appel d'une fonction pour insérer les données dans la base de données
-        $this->putDataInDatabase($data);
-
 
 
         return $this->render('default/index.html.twig',
@@ -60,10 +59,13 @@ class DefaultController extends Controller
 
         //Découpage du fichier dans un tableau indicé
         $rows = str_getcsv($data,"\n");
+        //Supression de la première ligne du tableau
+        unset($rows[0]);
 
         foreach ($rows as $line){
-            foreach ($line as $elmt){
-                $columns = explode(';', $elmt);
+            //foreach ($line as $elmt){
+                var_dump('$ligne =',$line);
+                $columns = explode(';', $line);
 
                 //Recherche de l'email dans la base de données
                 $person = $this->getDoctrine()
@@ -98,15 +100,12 @@ class DefaultController extends Controller
                     $person->setAdresse($adress);
                 }
 
-                //Modification de la date du format français à anglais
-                $jour = substr($columns[6],0,2);
-                $mois = substr($columns[6],3,2);
-                $annee = substr($columns[6],6,4);
-                $date = $annee.$mois.$jour;
+                //Récupération des éléments de la date au format français
+                $date = explode("/",$columns[6]);
 
                 //Création d'un éventuel nouveau paiement
                 $paiement = new Paiement();
-                $paiement->setDate($date)
+                $paiement->setDate(date_date_set(date_create(),$date[2],$date[1],$date[0]))
                     ->setMontant($columns[7])
                     ->setNature($columns[8]);
                 //Ajout de la personne à ce paiement
@@ -114,14 +113,13 @@ class DefaultController extends Controller
                 //Ajout du paiement à la personne
                 $person->addPaiement($paiement);
 
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($person);
+                $em->flush();
 
-            }
+            //}
         }
 
-        //Boucle sur chaque ligne
-        for ($i=0; $i<count($rows);$i++){
-            //Découpage d'une ligne en un tableau de colonnes
-            $columns = explode(';', $rows[$i]);
-        }
+
     }
 }

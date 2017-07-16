@@ -46,7 +46,7 @@ class Adresse
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne", mappedBy="adresse")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Personne", mappedBy="adresse", cascade={"persist"})
      */
     private $personnes;
 
